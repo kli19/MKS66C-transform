@@ -18,6 +18,11 @@ def make_translate( x, y, z ):
 
 def make_scale( x, y, z ):
     s = new_matrix)
+    s[0][0] = x
+    s[1][1] = y
+    s[2][2] = z
+    s[3][3] = 1
+    return s
     
 def make_rotX( theta ):
     r = new_matrix()
