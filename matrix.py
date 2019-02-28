@@ -45,7 +45,14 @@ def make_rotY( theta ):
     return r
 
 def make_rotZ( theta ):
-    pass
+    r = new_matrix()
+    ident(r)
+    theta = math.radians(theta)
+    r[0][0] = math.cos(theta)
+    r[1][1] = math.cos(theta)
+    r[0][1] = math.sin(theta)
+    r[1][0] = -1 * math.sin(theta)
+    return r
 
 #print the matrix such that it looks like
 #the template in the top comment
