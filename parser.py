@@ -39,14 +39,17 @@ def parse_file( fname, points, transform, screen, color ):
     while i < len(lines):
         command = lines[i]
         if command == "line":
-            coordinates = [int(c) for c in lines[i+1].split(" ")]
-            add_edge(points, coordinates[0], coordinates[1], coordinates[2],coordinates[3],coordinates[4],coordinates[5])
+            c = [int(c) for c in lines[i+1].split(" ")]
+            add_edge(points, c[0], c[1], c[2], c[3], c[4], c[5])
             n += 2
         elif command == "ident"
             ident(transform)
             n += 1
         elif command == "scale"
-            pass
+            c = [int(c) for c in lines[i+1].split(" ")]
+            s = make_scale(c[0], c[1], c[2])
+            matrix_mult(s, transform)
+            n += 2
         elif command == "rotate"
             pass
         elif command == "translate"
