@@ -50,9 +50,12 @@ def parse_file( fname, points, transform, screen, color ):
             s = make_scale(c[0], c[1], c[2])
             matrix_mult(s, transform)
             n += 2
+        elif command == "move"
+            c = [int(c) for c in lines[i+1].split(" ")]
+            t = make_translate(c[0], c[1], c[2])
+            matrix_mult(t, transform)
+            n += 2
         elif command == "rotate"
-            pass
-        elif command == "translate"
             pass
         elif command == "apply"
             pass
