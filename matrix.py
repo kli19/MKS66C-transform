@@ -32,10 +32,17 @@ def make_rotX( theta ):
     r[2][2] = math.cos(theta)
     r[1][2] = math.sin(theta)
     r[2][1] = -1 * math.sin(theta)
-    
+    return r
 
 def make_rotY( theta ):
-    pass
+    r = new_matrix()
+    ident(r)
+    theta = math.radians(theta)
+    r[0][0] = math.cos(theta)
+    r[2][2] = math.cos(theta)
+    r[2][0] = math.sin(theta)
+    r[0][2] = -1 * math.sin(theta)
+    return r
 
 def make_rotZ( theta ):
     pass
