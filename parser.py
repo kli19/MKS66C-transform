@@ -34,36 +34,60 @@ See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
     f = open(fname, "r")
-    lines = f.read().split()
+    lines = f.read().split("\n")
     i = 0
     while i < len(lines):
         command = lines[i]
+        print(command)
         if command == "line":
-            c = [int(c) for c in lines[i+1].split(" ")]
+            c = [int(x) for x in lines[i+1].split(" ")]
             add_edge(points, c[0], c[1], c[2], c[3], c[4], c[5])
-            n += 2
-        elif command == "ident"
+            i += 2
+            print(c)
+        elif command == "ident":
             ident(transform)
-            n += 1
-        elif command == "scale"
+            i += 1
+            print_matrix(transform)
+        elif command == "scale":
             c = [int(c) for c in lines[i+1].split(" ")]
             s = make_scale(c[0], c[1], c[2])
             matrix_mult(s, transform)
-            n += 2
-        elif command == "move"
+            i += 2
+            print(c)
+        elif command == "move":
             c = [int(c) for c in lines[i+1].split(" ")]
             t = make_translate(c[0], c[1], c[2])
             matrix_mult(t, transform)
-            n += 2
-        elif command == "rotate"
-            pass
-        elif command == "apply"
-            pass
-        elif command == "display"
-            pass
-        elif command == "save"
-            pass
-        elif command = "quit"
-            pass
+            i += 2
+            print(c)
+        elif command == "rotate":
+            c = lines[i+1].split()
+            axis = c[0]
+            theta = int(c[1])
+            if axis == "x":
+                r = make_rotX(theta)
+            elif axis == "y":
+                r = make_rotY(theta)
+            else:
+                r = make_rotZ(theta)
+            matrix_mult(r, transform)
+            i += 2
+            print_matrix(transform)
+        elif command == "apply":
+            matrix_mult(transform, points)
+            i += 1
+            print_matrix(points)
+        elif command == "display":
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+            i += 1
+        elif command == "save":
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            save_extension(screen, lines[i+1])
+            i += 2
+        elif command == "quit":
+            i = len(lines)
         else:
-            x += 1
+            i += 1
